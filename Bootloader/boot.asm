@@ -42,7 +42,7 @@ ReadSectors:
         int 0x13
 
         add dword [DAP+8], 127  ; increment sector count
-        add word [DAP+6], 0xFE0 ; (512*127) >> 16
+        add word [DAP+6], 0xFE0 ; (512*127) >> 4
 
         pop cx
         loop .loop
