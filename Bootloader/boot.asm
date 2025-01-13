@@ -37,7 +37,6 @@ ReadSectors:
         push    cx
 
         mov     ah, 0x42
-        mov     dl, [bootdisk]
         mov     si, DAP
         int     0x13
 
