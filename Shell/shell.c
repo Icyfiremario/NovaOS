@@ -11,7 +11,6 @@
 #include "../Font/text.h"
 #include "../Userspace/GUI/gui.h"
 #include "../Userspace/userspace.h"
-#include "../Include/math.h"
 #include "../Programs/starfield.h"
 
 #include "shell.h"
