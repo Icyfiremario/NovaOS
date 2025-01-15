@@ -232,12 +232,13 @@ void UserspaceState(int state)
 void DesktopIcons()
 {
     FileSystem* fs = (FileSystem*) FSADDRESS;
+    Directory* currentDir = GetRootDir();
 
     for (int i = 0; i < MAXFILES; i++)
     {
-        if (fs->files[i].filename[0] != '\0')
+        if (currentDir->files[i].filename[0] != '\0')
         {
-            DrawDesktopIcon(ICON_TEXT, fs->files[i].filename, 10, 10 + (i * 76));
+            DrawDesktopIcon(ICON_TEXT, currentDir->files[i].filename, 10, 10 + (i * 76));
         }
     }
 }
