@@ -11,6 +11,8 @@
 #include "../Font/text.h"
 #include "../Userspace/GUI/gui.h"
 #include "../Userspace/userspace.h"
+#include "../Include/math.h"
+#include "../Programs/starfield.h"
 
 #include "shell.h"
 
@@ -25,11 +27,6 @@ void PrintWelcomeMSG()
     Print("(NO GUI)\n\n", 0x0C);
     Print("Type 'help' to start using the shell.\n", 0x0F);
     Print("Type 'gfx' to start using the GUI.\n\n", 0x0F);
-}
-
-void PrintCurrentDir()
-{
-    Print(currentDir, 0x0F);
 }
 
 void StartShellNoGUI()
@@ -161,6 +158,10 @@ void ProcessShellCMD(char* command)
     {
         CreateFile(args[0], args[1], sizeof(args[1]));
     }
+    else if (strcmp(cmd, "mkdir") == 0x00)
+    {
+        MakeDir(args[0]);
+    }
     else if (strcmp(cmd, "cat") == 0x00)
     {
         BYTE buffer[128];
@@ -186,9 +187,18 @@ void ProcessShellCMD(char* command)
     {
         DeleteFile(args[0]);
     }
+    else if (strcmp(cmd, "deldir") == 0x00)
+    {
+        DeleteDir(args[0]);
+    }
     else if (strcmp(cmd, "ls") == 0x00)
     {
         ListFiles();
+        ListDirs();
+    }
+    else if (strcmp(cmd, "cd") == 0x00)
+    {
+        ChangeDir(args[0]);
     }
     else
     {
@@ -196,5 +206,5 @@ void ProcessShellCMD(char* command)
     }
 
     Print("\n\n", 0x00);
-    Print(currentDir, 0x0F);
+    PrintCurrentDir();
 }
