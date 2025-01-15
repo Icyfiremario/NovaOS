@@ -3,6 +3,8 @@
 #define MAXSUBDIR   0x05
 #define FSADDRESS   0x2000
 
+typedef struct Directory Directory;
+
 typedef struct
 {
     char filename[MAXFILENAME];
@@ -10,10 +12,21 @@ typedef struct
     DWORD dataOffset;
 } FileHeader;
 
+struct Directory
+{
+    char name[MAXFILENAME];
+    FileHeader files[MAXFILES];
+
+    Directory* subdirs[MAXSUBDIR];
+    Directory* parent;
+
+    DWORD nextFreeBlock;
+};
+
 typedef struct
 {
-    FileHeader files[MAXFILES];
-    DWORD nextFreeBlock;
+    Directory root;
+    Directory* currentDir;
 } FileSystem;
 
 void InitFileSystem();
@@ -24,3 +37,12 @@ int FindFile(const char* filename);
 int FileInfo(const char* filename);
 int RenameFile(const char* oldFilename, const char* newFilename);
 void ListFiles();
+
+int MakeDir(const char* dir);
+int DeleteDir(const char* dirname);
+int ChangeDir(const char* dirname);
+void ListDirs();
+
+void PrintCurrentDir();
+
+Directory* GetRootDir();
