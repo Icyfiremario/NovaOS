@@ -96,7 +96,10 @@ void ProcessShellCMD(char* command)
         Print("\ninfo - ", 0x0A);     Print("Show a file info.", 0x0F);
         Print("\nrename - ", 0x0A);   Print("Rename a existing file.", 0x0F);
         Print("\ndel - ", 0x0A);      Print("Delete a existing file.", 0x0F);
-        Print("\nls - ", 0x0A);       Print("List all files/dir in current local.\n\n", 0x0F);
+        Print("\nls - ", 0x0A);       Print("List all files/dir in current local.", 0x0F);
+        Print("\nmkdir - ", 0x0A);    Print("Create a directory.", 0x0F);
+        Print("\ndeldir - ", 0x0A);   Print("Delete a existing directory.", 0x0F);
+        Print("\ncd - ", 0x0A);       Print("Change the current directory.\n\n", 0x0F);
         Print("IMPORTANT!:" , 0x0C);  Print("To use arguments, place the symbol ''.", 0x0F);
     }
     else if (strcmp(cmd, "about") == 0x00)
