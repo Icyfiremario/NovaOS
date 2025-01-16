@@ -232,17 +232,29 @@ void UserspaceState(int state)
 void DesktopIcons()
 {
     FileSystem* fs = (FileSystem*) FSADDRESS;
-    Directory* currentDir = GetRootDir();
 
+    int index = 0;
+
+    //Show Dirs
+    for (int i = 0; i < MAXSUBDIR; i++)
+    {
+        if (fs->root.subdirs[i] != NULL && fs->root.subdirs[i]->name[0] != '\0')
+        {
+            DrawDesktopIcon(ICON_DIR, fs->root.subdirs[i]->name, 10, 10 + (index * 76));
+            index++;
+        }
+    }
+
+    //Show TXTs
     for (int i = 0; i < MAXFILES; i++)
     {
-        if (currentDir->files[i].filename[0] != '\0')
+        if (fs->root.files[i].filename[0] != '\0')
         {
-            DrawDesktopIcon(ICON_TEXT, currentDir->files[i].filename, 10, 10 + (i * 76));
+            DrawDesktopIcon(ICON_TEXT, fs->root.files[i].filename, 10, 10 + (index * 76));
+            index++;
         }
     }
 }
-
 void UserSpace()
 {
     while (!inUserSpace)
