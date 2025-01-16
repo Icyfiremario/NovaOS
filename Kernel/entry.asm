@@ -9,7 +9,9 @@
 [GLOBAL      info]
 [GLOBAL      user]
 [GLOBAL  terminal]
+
 [GLOBAL       txt]
+[GLOBAL       dir]
 
 section .text
         global  _start
@@ -29,4 +31,6 @@ section .data
         info:     incbin "Include/Icons/info.vad"
         user:     incbin "Include/Icons/user.vad"
         terminal: incbin "Include/Icons/terminal.vad"
+
         txt:      incbin "Include/Icons/txt.vad"
+        dir:      incbin "Include/Icons/dir.vad"
