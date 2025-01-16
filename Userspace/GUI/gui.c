@@ -14,6 +14,7 @@ extern BYTE question[];
 extern BYTE user[];
 extern BYTE terminal[];
 extern BYTE txt[];
+extern BYTE dir[];
 
 void DrawWindow(WINDOW window, int nextWindow)
 {
@@ -106,6 +107,9 @@ void DrawDesktopIcon(EXTICON exticon, char* filename, int x, int y)
         case ICON_TEXT:
             iconBitmap = txt;
             break;
+        case ICON_DIR:
+            iconBitmap = dir;
+            break;
         default:
             return;
     }
@@ -114,9 +118,9 @@ void DrawDesktopIcon(EXTICON exticon, char* filename, int x, int y)
     {
         for (int xs = x; xs < 32; xs++)
         {
-            BYTE color = iconBitmap[ys * 32 + (xs + 8)];
+            BYTE color = iconBitmap[ys * 32 + xs];
 
-            if (color != 0x00)
+            if (color != 0x00 && color != 28)
             {
                 SetPixel(x + xs * 2, y + ys * 2, color);
                 SetPixel(x + xs * 2 + 1, y + ys * 2, color);
@@ -126,7 +130,7 @@ void DrawDesktopIcon(EXTICON exticon, char* filename, int x, int y)
         }
     }
 
-    SetCursorX(x);
+    SetCursorX(x + 20);
     SetCursorY(y + 60);
 
     Print(filename, 0x0F);
